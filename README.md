@@ -28,7 +28,7 @@ flowchart TD
     N --> O[📁 Session Logger\nJSON / CSV Export]
 ```
 
-## ✨ Features
+##  Features
 
 - 33-point full-body landmark detection at 30+ FPS
 - Joint angle calculation for all major joints
@@ -53,7 +53,7 @@ flowchart TD
 | Data Export | Pandas, JSON |
 | UI (optional) | Streamlit |
 
-## 🚀 How to Run
+##  How to Run
 
 ```bash
 # 1. Clone and install
