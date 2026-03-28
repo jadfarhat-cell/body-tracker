@@ -1,34 +1,34 @@
-# 🏃 Body Tracker
+# Body Tracker
 
 A real-time body pose tracking and motion analysis system using computer vision. Detects and tracks 33 full-body landmarks, calculates joint angles, and provides live analytics for fitness, sports, and rehabilitation applications.
 
-## 🏗️ Architecture
+## Architecture
 
 ```mermaid
 flowchart TD
-    A[📷 Input Source\nWebcam / Video File / RTSP] --> B[Frame Capture\nOpenCV VideoCapture]
-    B --> C[Image Preprocessor\nResize + Normalize]
-    C --> D[Pose Estimator\nMediaPipe BlazePose]
-    D --> E{Pose Detected?}
-    E -- No --> F[⚠️ No Person Found]
-    E -- Yes --> G[33 Landmark Points\nWorld + Image Coords]
-    
-    G --> H[Joint Angle Calculator\nShoulder / Elbow / Hip / Knee]
-    G --> I[Skeleton Renderer\nDraw Connections + Points]
-    G --> J[Motion Analyzer\nVelocity + Acceleration]
-    
-    H --> K[Rep Counter\nAngle Threshold Logic]
-    H --> L[Posture Validator\nForm Checker]
-    J --> M[Activity Classifier\nSVM / MLP Model]
-    
-    K --> N[📊 Live Dashboard\nOpenCV Overlay / Streamlit]
-    L --> N
-    M --> N
-    I --> N
-    N --> O[📁 Session Logger\nJSON / CSV Export]
+ A[ Input Source\nWebcam / Video File / RTSP] --> B[Frame Capture\nOpenCV VideoCapture]
+ B --> C[Image Preprocessor\nResize + Normalize]
+ C --> D[Pose Estimator\nMediaPipe BlazePose]
+ D --> E{Pose Detected?}
+ E -- No --> F[ No Person Found]
+ E -- Yes --> G[33 Landmark Points\nWorld + Image Coords]
+ 
+ G --> H[Joint Angle Calculator\nShoulder / Elbow / Hip / Knee]
+ G --> I[Skeleton Renderer\nDraw Connections + Points]
+ G --> J[Motion Analyzer\nVelocity + Acceleration]
+ 
+ H --> K[Rep Counter\nAngle Threshold Logic]
+ H --> L[Posture Validator\nForm Checker]
+ J --> M[Activity Classifier\nSVM / MLP Model]
+ 
+ K --> N[ Live Dashboard\nOpenCV Overlay / Streamlit]
+ L --> N
+ M --> N
+ I --> N
+ N --> O[ Session Logger\nJSON / CSV Export]
 ```
 
-##  Features
+## Features
 
 - 33-point full-body landmark detection at 30+ FPS
 - Joint angle calculation for all major joints
@@ -40,7 +40,7 @@ flowchart TD
 - CSV/JSON data export for analysis
 - RTSP stream support for IP cameras
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -53,7 +53,7 @@ flowchart TD
 | Data Export | Pandas, JSON |
 | UI (optional) | Streamlit |
 
-##  How to Run
+## How to Run
 
 ```bash
 # 1. Clone and install
@@ -79,23 +79,23 @@ streamlit run dashboard.py
 python tracker.py --export-csv session_data.csv
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 body-tracker/
-├── tracker.py              # Main tracking script
-├── dashboard.py            # Streamlit dashboard
+├── tracker.py # Main tracking script
+├── dashboard.py # Streamlit dashboard
 ├── modules/
-│   ├── pose_detector.py    # MediaPipe wrapper
-│   ├── angle_calculator.py # Joint angle math
-│   ├── rep_counter.py      # Exercise rep logic
-│   ├── form_checker.py     # Posture validation
-│   ├── classifier.py       # Activity recognition
-│   └── renderer.py         # Visualization
+│ ├── pose_detector.py # MediaPipe wrapper
+│ ├── angle_calculator.py # Joint angle math
+│ ├── rep_counter.py # Exercise rep logic
+│ ├── form_checker.py # Posture validation
+│ ├── classifier.py # Activity recognition
+│ └── renderer.py # Visualization
 ├── models/
-│   └── activity_classifier.pkl
+│ └── activity_classifier.pkl
 ├── data/
-│   └── sessions/           # Saved session data
+│ └── sessions/ # Saved session data
 ├── requirements.txt
 └── config.yaml
 ```
