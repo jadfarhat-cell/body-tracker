@@ -4,7 +4,29 @@ A real-time body pose tracking and motion analysis system using computer vision.
 
 ## Architecture
 
-![Architecture Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRECiBBWyBJbnB1dCBTb3VyY2VcbldlYmNhbSAvIFZpZGVvIEZpbGUgLyBSVFNQXSAtLT4gQltGcmFtZSBDYXB0dXJlXG5PcGVuQ1YgVmlkZW9DYXB0dXJlXQogQiAtLT4gQ1tJbWFnZSBQcmVwcm9jZXNzb3JcblJlc2l6ZSArIE5vcm1hbGl6ZV0KIEMgLS0+IERbUG9zZSBFc3RpbWF0b3Jcbk1lZGlhUGlwZSBCbGF6ZVBvc2VdCiBEIC0tPiBFe1Bvc2UgRGV0ZWN0ZWQ/fQogRSAtLSBObyAtLT4gRlsgTm8gUGVyc29uIEZvdW5kXQogRSAtLSBZZXMgLS0+IEdbMzMgTGFuZG1hcmsgUG9pbnRzXG5Xb3JsZCArIEltYWdlIENvb3Jkc10KIAogRyAtLT4gSFtKb2ludCBBbmdsZSBDYWxjdWxhdG9yXG5TaG91bGRlciAvIEVsYm93IC8gSGlwIC8gS25lZV0KIEcgLS0+IElbU2tlbGV0b24gUmVuZGVyZXJcbkRyYXcgQ29ubmVjdGlvbnMgKyBQb2ludHNdCiBHIC0tPiBKW01vdGlvbiBBbmFseXplclxuVmVsb2NpdHkgKyBBY2NlbGVyYXRpb25dCiAKIEggLS0+IEtbUmVwIENvdW50ZXJcbkFuZ2xlIFRocmVzaG9sZCBMb2dpY10KIEggLS0+IExbUG9zdHVyZSBWYWxpZGF0b3JcbkZvcm0gQ2hlY2tlcl0KIEogLS0+IE1bQWN0aXZpdHkgQ2xhc3NpZmllclxuU1ZNIC8gTUxQIE1vZGVsXQogCiBLIC0tPiBOWyBMaXZlIERhc2hib2FyZFxuT3BlbkNWIE92ZXJsYXkgLyBTdHJlYW1saXRdCiBMIC0tPiBOCiBNIC0tPiBOCiBJIC0tPiBOCiBOIC0tPiBPWyBTZXNzaW9uIExvZ2dlclxuSlNPTiAvIENTViBFeHBvcnRd)
+```mermaid
+flowchart TD
+ A[ Input Source\nWebcam / Video File / RTSP] --> B[Frame Capture\nOpenCV VideoCapture]
+ B --> C[Image Preprocessor\nResize + Normalize]
+ C --> D[Pose Estimator\nMediaPipe BlazePose]
+ D --> E{Pose Detected?}
+ E -- No --> F[ No Person Found]
+ E -- Yes --> G[33 Landmark Points\nWorld + Image Coords]
+ 
+ G --> H[Joint Angle Calculator\nShoulder / Elbow / Hip / Knee]
+ G --> I[Skeleton Renderer\nDraw Connections + Points]
+ G --> J[Motion Analyzer\nVelocity + Acceleration]
+ 
+ H --> K[Rep Counter\nAngle Threshold Logic]
+ H --> L[Posture Validator\nForm Checker]
+ J --> M[Activity Classifier\nSVM / MLP Model]
+ 
+ K --> N[ Live Dashboard\nOpenCV Overlay / Streamlit]
+ L --> N
+ M --> N
+ I --> N
+ N --> O[ Session Logger\nJSON / CSV Export]
+```
 
 ## Features
 
